@@ -11,7 +11,7 @@ RUN chmod a-w /etc && \
 WORKDIR /home/mlflow
 
 # Copy project config and install dependencies
-COPY pyproject.toml .
+COPY pyproject.toml uv.lock .
 RUN uv sync --frozen --no-dev
 
 # Ensure python symlink for compatibility

@@ -14,6 +14,7 @@ The MLflow server container is built with:
 - **Exposed port**: 8787
 
 For dependencies and versions, see [container/mlflow/pyproject.toml](container/mlflow/pyproject.toml).
+The lockfile used for reproducible builds is [container/mlflow/uv.lock](container/mlflow/uv.lock).
 
 ## Build
 
@@ -22,6 +23,13 @@ make build
 ```
 
 This produces a single `mlflow` image used for both tracking and artifacts servers.
+
+## CI
+
+GitHub Actions includes:
+- `docker-build`: verifies the MLflow image builds on PRs/pushes.
+- `lock-sync`: checks `container/mlflow/uv.lock` is in sync with `pyproject.toml`.
+- `trivy`: scans the built image for HIGH/CRITICAL vulnerabilities and uploads SARIF.
 
 ## Deploy
 

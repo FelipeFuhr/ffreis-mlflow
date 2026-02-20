@@ -1,0 +1,36 @@
+name: Docker Build
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "container/mlflow/**"
+      - "Makefile"
+      - ".github/workflows/docker-build.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "container/mlflow/**"
+      - "Makefile"
+      - ".github/workflows/docker-build.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build container image
+        run: |
+          set -euo pipefail
+          make build
+
+      - name: Verify built image exists
+        run: docker image inspect mlflow > /dev/null

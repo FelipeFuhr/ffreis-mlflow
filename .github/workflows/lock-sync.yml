@@ -1,0 +1,43 @@
+name: Lock Sync
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "container/mlflow/pyproject.toml"
+      - "container/mlflow/uv.lock"
+      - ".github/workflows/lock-sync.yml"
+  push:
+    branches: [ main ]
+    paths:
+      - "container/mlflow/pyproject.toml"
+      - "container/mlflow/uv.lock"
+      - ".github/workflows/lock-sync.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lock-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b
+        with:
+          enable-cache: true
+
+      - name: Verify uv.lock is up to date
+        working-directory: container/mlflow
+        run: |
+          set -euo pipefail
+          test -s uv.lock || (echo "uv.lock missing - run 'uv lock' in container/mlflow"; exit 1)
+          uv lock --check
