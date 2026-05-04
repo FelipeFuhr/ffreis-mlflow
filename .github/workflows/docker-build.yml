@@ -34,3 +34,11 @@ jobs:
 
       - name: Verify built image exists
         run: docker image inspect mlflow > /dev/null
+
+      - name: Scan image for vulnerabilities
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
+        with:
+          image-ref: mlflow
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
