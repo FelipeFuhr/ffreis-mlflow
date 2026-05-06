@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>FelipeFuhr/ffreis-platform-standards:renovate/default#1b2afe64334b4aff11c7e3ebc5fa964041efa3b3"],
+  "enabledManagers": ["dockerfile", "github-actions"],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 1,
+  "packageRules": [
+    { "matchManagers": ["dockerfile"], "groupName": "Docker base images", "labels": ["dependencies"] }
+  ]
+}

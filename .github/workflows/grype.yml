@@ -1,4 +1,4 @@
-name: Container Scan (Trivy)
+name: Container Scan (Grype)
 
 on:
   workflow_dispatch:
@@ -7,13 +7,13 @@ on:
     paths:
       - "container/mlflow/**"
       - "Makefile"
-      - ".github/workflows/trivy.yml"
+      - ".github/workflows/grype.yml"
   push:
     branches: [main]
     paths:
       - "container/mlflow/**"
       - "Makefile"
-      - ".github/workflows/trivy.yml"
+      - ".github/workflows/grype.yml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,10 +24,12 @@ permissions:
   security-events: write
 
 jobs:
-  trivy:
-    uses: FelipeFuhr/ffreis-workflows-container/.github/workflows/container-scan-trivy.yml@main
+  grype:
+    uses: FelipeFuhr/ffreis-workflows-container/.github/workflows/container-scan-grype.yml@main
     with:
       image-name: "mlflow:ci"
       containerfile: "container/mlflow/Containerfile"
       context: "container/mlflow"
-      severity: "HIGH,CRITICAL"
+      severity: "high"
+      build-args: ""
+      # Upload is handled by the reusable workflow (SARIF upload gated on forks)
