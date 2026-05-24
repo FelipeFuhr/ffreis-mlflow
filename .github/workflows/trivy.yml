@@ -19,12 +19,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-  security-events: write
-
 jobs:
   trivy:
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
     uses: FelipeFuhr/ffreis-workflows-container/.github/workflows/container-scan-trivy.yml@main
     with:
       image-name: "mlflow:ci"
