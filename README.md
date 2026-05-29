@@ -1,6 +1,6 @@
 # Ffreis MLflow
 
-This repository builds the MLflow tracking and artifacts server container image. The Kubernetes deployment manifests live in the ffreis-infrastructure repo.
+This repository builds the MLflow tracking and artifacts server container image. Kubernetes deployment manifests live in a private infrastructure repository.
 
 > **Warning**
 > Do not store secrets or other sensitive data in git. Use Kubernetes Secrets or your cluster's secret manager.
@@ -33,11 +33,7 @@ GitHub Actions includes:
 
 ## Deploy
 
-Kubernetes resources and manifests are in the ffreis-infrastructure repo:
-```
-cd ../ffreis-infrastructure/ffreis-mlflow
-make apply
-```
+Kubernetes resources and manifests are in a private infrastructure repository. See that repo's README for deployment instructions.
 
 ## Cleanup
 
@@ -46,8 +42,4 @@ Clean local images:
 make clean-images
 ```
 
-Clean Kubernetes resources (from ffreis-infrastructure):
-```
-cd ../ffreis-infrastructure/ffreis-mlflow
-make clean-kube
-```
+To clean Kubernetes resources, see the private infrastructure repository.

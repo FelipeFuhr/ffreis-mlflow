@@ -1,13 +1,11 @@
 # Agent Context
 
 **This repo:** `ffreis-mlflow` — builds the MLflow tracking and artifacts server
-container image. Deployment manifests live in `stock/ffreis-infrastructure`.
+container image. Deployment manifests live in a private Kubernetes infrastructure repository.
 
 ## Non-obvious facts
 
-- **This repo builds the image; deployment is in a different repo.** Changes to the
-  image here must be coordinated with `stock/ffreis-infrastructure` to update the
-  manifest image tag.
+- **This repo builds the image; deployment is in a different repo.** Changes to the image here must be coordinated with the private infra repository to update the manifest image tag.
 
 - **Runs as non-root (uid 2000).** Do not change this — it is a security requirement.
 
