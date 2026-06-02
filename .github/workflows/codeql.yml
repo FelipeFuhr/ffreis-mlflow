@@ -5,7 +5,12 @@ on:
   push:
     branches: [main, master]
   schedule:
-    - cron: "0 3 * * 0" # Sundays 03:00 UTC
+    - cron: "10 0 14 * *"  # monthly scattered (was: 0 3 * * 0)
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   codeql:
