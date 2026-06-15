@@ -1,5 +1,9 @@
 # Ffreis MLflow
 
+<!-- ffreis-badges:start -->
+[![CI](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/FelipeFuhr/ffreis-badges/main/badges/ffreis-mlflow/ci.json)](https://github.com/FelipeFuhr/ffreis-mlflow/actions)
+<!-- ffreis-badges:end -->
+
 This repository builds the MLflow tracking and artifacts server container image. The Kubernetes deployment manifests live in the ffreis-infrastructure repo.
 
 > **Warning**
