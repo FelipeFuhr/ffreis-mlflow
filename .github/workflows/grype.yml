@@ -26,7 +26,7 @@ jobs:
       contents: read
       actions: read
       security-events: write
-    uses: FelipeFuhr/ffreis-workflows-container/.github/workflows/container-scan-grype.yml@main
+    uses: ffreis-org/ffreis-workflows-container/.github/workflows/container-scan-grype.yml@main
     with:
       image-name: "mlflow:ci"
       containerfile: "container/mlflow/Containerfile"
