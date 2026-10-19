@@ -18,5 +18,8 @@ jobs:
       security-events: write
     uses: FelipeFuhr/ffreis-workflows-general/.github/workflows/general-osv-scanner.yml@3c4c9012ea1e8edfda316cf0d87052b33e5fa3fe # v2.1.0
     with:
+      # runner is explicit: v2.0.0 flipped the reusable default to
+      # ["self-hosted","local"] and this owner has no self-hosted pool.
+      runner: '["ubuntu-latest"]'
       working-directory: "."
       upload-sarif: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false }}
